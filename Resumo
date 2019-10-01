@@ -1,0 +1,163 @@
+/*
+/	Uma eleição, composta por 4 candidatos será realizada e os votos computados por um terminal.
+/	Onde cada eleitor, deverá informar o numero de seu candidato. Sendo assim, o voto contabilizado. 
+/	Há ainda a possibilidade de vogtos brancos e nulos que também serão computados pelo sistema.
+/
+/	NUM.	Nome
+/	1		Ortiz
+/	2		Erwin
+/	3		Heredia
+/	4		Vanessa
+/	0		Nulo
+/	X		Branco
+/
+/	O terminal, possui uma codificação que ao digitar um valor negativo, encerra-se, o processo de votação.
+/	Ao termino, deve ser ixibido um relatorio contendo:
+/	- Número de votos em cada candidato + percentual
+/	- Número de votos nulos e branco + percentual
+/	- Total de eleitores
+/	
+/	Desenvolva a aplicação que simule o terminal de votos acima descrito.
+/*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h> //tratamento de texto
+#include <locale.h>
+
+int main (){
+	setlocale(LC_ALL,"");
+	
+	//declaração de variaveis
+	int 	numCand, tEleitores = 0;
+	int 	qtCand1 = 0, qtCand2 = 0, qtCand3 = 0, 
+			qtCand4 = 0, qtNulo = 0, qtBranco = 0;
+	float 	pcCand1, pcCand2, pcCand3, pcCand4, pcNulo, pcBra; //porcentagem
+	char	cand[20];
+	int i; //barras do total de votos
+	
+	do{
+		printf("***PROGRAMA  E L E I Ç Õ E S  2019****\n\n");
+	
+		printf("*******************************************\n");
+		printf("Informe o número do candidato: \n\n");
+		printf("Número\t\t\tCandidato\n");
+		printf("*******************************************\n");
+		printf("1\t\t\tOrtiz\n");
+		printf("2\t\t\tErwin\n");
+		printf("3\t\t\tHeredia\n");
+		printf("4\t\t\tVanessa\n");
+		printf("0\t\t\tNulo\n");
+		printf("qualquer valor\t\tBranco\n");
+		printf("*******************************************\n");
+		
+		printf("Seu voto: ");
+		scanf("%d", &numCand);
+		
+		if(numCand == 1){
+			strcpy(cand, "Ortiz");//para variavel numero receber char:::: nome=Ortiz	
+			qtCand1++; //qtCand1 = qtCand1 + 1;
+			tEleitores++;
+		}else if(numCand == 2){
+			strcpy(cand, "Erwin");	
+			qtCand2++; 
+			tEleitores++;
+		}else if(numCand == 3){
+			strcpy(cand, "Heredia");
+			qtCand3++;
+			tEleitores++;
+		}else if(numCand == 4){
+			strcpy(cand, "Vanessa");	
+			qtCand1++; 
+			tEleitores++;
+		}else if(numCand == 0){
+			strcpy(cand, "Nulo");	
+			qtNulo++; 
+			tEleitores++;
+		}else if(numCand <= -1){      
+			break; //finaliza
+		}else{
+			strcpy(cand, "Branco");	
+			qtBranco++;
+			tEleitores++;	
+		}
+			//**************Mostrar em quem votou*******************************
+			printf("\n\n**Voto Computado: %s ***", cand); 	
+			_sleep(800);	//mostrar por 0,8s em quem foi votado
+	
+		system("cls");
+	}while(numCand > -1); // nquanto o voto for maior do que -1
+
+	//**************************CALCULOS*****************************************
+	//percentual = (quantidade / total) * 100
+			
+	//#1
+	pcCand1 = ((float)qtCand1/(float)tEleitores)*100; // (float)inteiro, para que o inteiro, nessa expressão seja lida como float
+			
+	//#2
+	pcCand2 = ((float)qtCand2/(float)tEleitores)*100;
+			
+	//#3
+	pcCand3 = ((float)qtCand3/(float)tEleitores)*100;
+			
+	//#4
+	pcCand4 = ((float)qtCand4/(float)tEleitores)*100;
+			
+	//#Nulo
+	pcNulo = ((float)qtNulo/(float)tEleitores)*100;
+			
+	//#Branco
+	pcBra = ((float)qtBranco/(float)tEleitores)*100;
+	
+	system("cls");
+	
+	//************************RESULTADOS*****************************************
+	
+	printf("***** Resultado da eleição: *****\n\n");
+	//#1
+		printf("ORTIZ: %d\n", qtCand1);
+		for(i=0; i<pcCand1; i++){
+			printf("+");
+		}
+		printf(" (%.1f%%)\n\n", pcCand1);
+		
+	//#2	
+			printf("Erwin: %d\n", qtCand2);
+		for(i=0; i<pcCand2; i++){
+			printf("+");
+		}
+		printf(" (%.1f%%)\n\n", pcCand2);
+	
+	//#3	
+			printf("Heredia: %d\n", qtCand3);
+		for(i=0; i<pcCand3; i++){
+			printf("+");
+		}
+		printf(" (%.1f%%)\n\n", pcCand3);
+	
+	//#4	
+			printf("Vanessa: %d\n", qtCand4);
+		for(i=0; i<pcCand4; i++){
+			printf("+");
+		}
+		printf(" (%.1f%%)\n\n", pcCand4);
+		
+	//#NULO
+			printf("Nulo: %d\n", qtNulo);
+		for(i=0; i<pcNulo; i++){
+			printf("+");
+		}
+		printf(" (%.1f%%)\n\n", pcNulo);
+	//#BRANCO	
+			printf("Brancos: %d\n", qtBranco);
+		for(i=0; i<pcBra; i++){
+			printf("+");
+		}
+		printf(" (%.1f%%)\n\n", pcBra);
+	
+
+
+
+	printf("\n\n");
+	return(0);
+}
